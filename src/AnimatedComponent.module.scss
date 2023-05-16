@@ -1,0 +1,70 @@
+$color-circle: radial-gradient(
+  50% 50% at 50% 50%,
+  rgba(255, 0, 245, 0.15) 0%,
+  rgba(255, 0, 245, 0) 100%
+);
+@mixin circle-parameters($px, $color-circle) {
+  height: $px;
+  width: $px;
+  background: $color-circle;
+}
+@mixin circle-position($top, $left) {
+  position: absolute;
+  top: $top;
+  left: $left;
+}
+@mixin circle-animation($animation-name) {
+  animation: $animation-name 12s ease-out 1ms infinite;
+}
+@mixin animation($name, $x25, $y25, $x50, $y50, $x75, $y75) {
+  @keyframes #{$name} {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate($x25, $y25);
+    }
+    50% {
+      transform: translate($x50, $y50);
+    }
+    75% {
+      transform: translate($x75, $y75);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+}
+
+.container {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+
+  .circle-small {
+    @include circle-parameters(367px, $color-circle);
+    @include circle-position(0px, 1027px);
+    @include circle-animation(small-circle);
+    @include animation(small-circle, -942px, 65px, -779px, 507px, 295px, 558px);
+  }
+  .circle-medium {
+    @include circle-parameters(496px, $color-circle);
+    @include circle-position(435px, 1384px);
+    @include circle-animation(medium-circle);
+    @include animation(
+      medium-circle,
+      84px,
+      -370px,
+      -769px,
+      -369px,
+      -1337px,
+      -190px
+    );
+  }
+  .circle-large {
+    @include circle-parameters(582px, $color-circle);
+    @include circle-position(101px, 0px);
+    @include circle-animation(large-circle);
+    @include animation(large-circle, 649px, 285px, 1414px, 73px, 740px, -67px);
+  }
+}
